@@ -3,6 +3,8 @@ package com.capgemini.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +23,12 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projects/bulk")
-	public List<Project> saveProject(@RequestBody List<Project> projects) {
+	public List<Project> saveProjects(@RequestBody List<Project> projects) {
 		return projectService.saveProjects(projects);
 	}
 	
-
+	@GetMapping("/projects/{id}")
+    public Project getProjectById(@PathVariable Integer id) {
+        return projectService.getProjectById(id);
+    }
 }

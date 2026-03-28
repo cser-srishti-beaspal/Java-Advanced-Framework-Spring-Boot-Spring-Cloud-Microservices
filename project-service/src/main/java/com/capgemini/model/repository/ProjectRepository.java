@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.model.entity.Project;
 
-
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, Integer>{
-
+public interface ProjectRepository extends JpaRepository<Project, Integer> {
+	
 }

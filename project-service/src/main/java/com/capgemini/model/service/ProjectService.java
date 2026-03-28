@@ -11,7 +11,7 @@ import com.capgemini.model.repository.ProjectRepository;
 @Service
 public class ProjectService {
 	@Autowired
-	ProjectRepository projectRepository ;
+	ProjectRepository projectRepository;
 	
 	public Project saveProject(Project project) {
 		return projectRepository.save(project);
@@ -19,5 +19,10 @@ public class ProjectService {
 	
 	public List<Project> saveProjects(List<Project> projects) {
 		return projectRepository.saveAll(projects);
+	}
+	
+	public Project getProjectById(Integer id) {
+	    return projectRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Project not found"));
 	}
 }
