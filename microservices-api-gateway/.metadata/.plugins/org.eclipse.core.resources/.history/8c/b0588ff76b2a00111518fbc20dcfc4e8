@@ -1,0 +1,37 @@
+# ===============================
+# APPLICATION CONFIG
+# ===============================
+spring.application.name=api-gateway
+server.port=8080
+
+# ===============================
+# EUREKA CLIENT CONFIG
+# ===============================
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+
+eureka.instance.hostname=localhost
+eureka.instance.instance-id=${spring.application.name}:${server.port}
+eureka.instance.prefer-ip-address=true
+
+# ===============================
+# API GATEWAY ROUTES
+# ===============================
+# Route for STUDENT-SERVICE
+spring.cloud.gateway.server.webmvc.routes[0].id=student-service
+spring.cloud.gateway.server.webmvc.routes[0].uri=lb://student-service
+spring.cloud.gateway.server.webmvc.routes[0].predicates[0]=Path=/student/**
+spring.cloud.gateway.server.webmvc.routes[0].filters[0]=StripPrefix=1
+
+# Route for PROJECT-SERVICE
+spring.cloud.gateway.server.webmvc.routes[1].id=project-service
+spring.cloud.gateway.server.webmvc.routes[1].uri=lb://project-service
+spring.cloud.gateway.server.webmvc.routes[1].predicates[0]=Path=/project/**
+spring.cloud.gateway.server.webmvc.routes[1].filters[0]=StripPrefix=1
+
+# ===============================
+# OPTIONAL LOGGING
+# ===============================
+logging.level.org.springframework.cloud.gateway=DEBUG
+logging.level.org.springframework.web=INFO
