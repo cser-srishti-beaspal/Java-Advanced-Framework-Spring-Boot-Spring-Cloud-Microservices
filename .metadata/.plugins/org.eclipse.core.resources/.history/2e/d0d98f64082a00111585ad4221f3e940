@@ -1,0 +1,28 @@
+package com.capgemini.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.capgemini.model.service.StudentService;
+
+@RestController
+public class StudentController {
+	@Autowired
+	StudentService studentService;
+	
+	@PostMapping("/students")
+	public Student saveStudent(@RequestBody Student student) {
+		return studentService.saveStudent(student);
+	}
+	
+	@PostMapping("/students/bulk")
+	public List<Student> saveStudents(@RequestBody List<Student> students) {
+		return studentService.saveStudents(students);
+	}
+	
+	@GetMapping("/student/{id}")
+	public StudentResponse getStudentWithProject(@PathVariable Integer id) {
+		return studentService.getStudentWithProject(id);
+	}
+
+}
